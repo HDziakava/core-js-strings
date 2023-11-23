@@ -150,8 +150,18 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  const index = str.indexOf(value);
+
+  if (index < 0) return str;
+
+  const firstPart = str.split('').slice(0, index).join('');
+  const secondPart = str
+    .split('')
+    .slice(index + value.length)
+    .join('');
+
+  return firstPart + secondPart;
 }
 
 /**
@@ -166,8 +176,18 @@ function removeFirstOccurrences(/* str, value */) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  const index = str.lastIndexOf(value);
+
+  if (index < 0) return str;
+
+  const firstPart = str.split('').slice(0, index).join('');
+  const secondPart = str
+    .split('')
+    .slice(index + value.length)
+    .join('');
+
+  return firstPart + secondPart;
 }
 
 /**
@@ -183,13 +203,11 @@ function removeLastOccurrences(/* str, value */) {
  *   sumOfCodes() => 0
  */
 function sumOfCodes(str) {
-  const array = str.split('');
+  if (!str) return 0;
 
-  array.map((el) => {
-    return str.charCodeAt(el);
-  });
+  const charCodes = str.split('').map((_, index) => str.charCodeAt(index));
 
-  return array;
+  return charCodes.reduce((acc, cur) => acc + cur, 0);
 }
 
 /**
@@ -329,8 +347,13 @@ function countVowels(str) {
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const a = /[^A-Za-z0-9]/g;
+  const lowerCaseStr = str.toLowerCase().replace(a, '');
+
+  const reversedStr = lowerCaseStr.split('').reverse().join('');
+
+  return lowerCaseStr === reversedStr;
 }
 
 /**
